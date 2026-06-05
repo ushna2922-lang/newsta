@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Anaya's Kitchen CakeHouse — Lahore</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --red:#c0272d;--red2:#a81f25;--red3:#7a1218;
+      --ivory:#fdf8f2;--ivory2:#f5ede0;--ivory3:#ecddd0;
+      --gold:#c8953a;--gold2:#e0b050;--gold3:#a07825;
+      --dark:#1a0808;--muted:#7a4a4e;--border:#e8d5cf;
+      --white:#fff;
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'Lato',sans-serif;background:var(--ivory);color:var(--dark);overflow-x:hidden}
+
+    /* ── ORNAMENTAL DIVIDER ── */
+    .orn{display:flex;align-items:center;justify-content:center;gap:.7rem;margin:.6rem auto}
+    .orn-line{flex:1;max-width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+    .orn-line.r{background:linear-gradient(90deg,var(--gold),transparent)}
+    .orn-diamond{width:6px;height:6px;background:var(--gold);transform:rotate(45deg)}
+
+    /* ── NAV ── */
+    nav{
+      background:rgba(253,248,242,0.96);backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--border);
+      padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;
+      position:sticky;top:0;z-index:200;height:80px;
+      box-shadow:0 2px 30px #c0272d0a;
+    }
+    .logo{display:flex;align-items:center;gap:.9rem;text-decoration:none}
+    .logo-circle{
+      width:52px;height:52px;border-radius:50%;background:var(--red);
+      display:flex;align-items:center;justify-content:center;flex-shrink:0;
+      box-shadow:0 3px 14px #c0272d35;border:2px solid var(--gold2);
+    }
+    .logo-circle-inner{
+      font-family:'Cinzel',serif;color:#fff;font-size:.55rem;font-weight:700;
+      text-align:center;line-height:1.25;letter-spacing:.5px;
+    }
+    .logo-circle-inner .ak{font-size:.85rem;font-weight:700;display:block}
+    .logo-text .brand{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;color:var(--red);letter-spacing:1px}
+    .logo-text .sub{font-size:.58rem;color:var(--muted);letter-spacing:2.5px;text-transform:uppercase;font-weight:400;font-family:'Lato',sans-serif}
+    .nav-links{display:flex;gap:2rem;list-style:none}
+    .nav-links a{text-decoration:none;color:var(--muted);font-size:.78rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s;position:relative;padding-bottom:3px;font-family:'Lato',sans-serif}
+    .nav-links a::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1.5px;background:var(--red);transform:scaleX(0);transition:transform .25s;border-radius:2px}
+    .nav-links a:hover{color:var(--red)}
+    .nav-links a:hover::after{transform:scaleX(1)}
+    .nav-right{display:flex;align-items:center;gap:.7rem}
+    .cart-btn{position:relative;background:var(--red);border:none;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.05rem;color:#fff;transition:background .2s;flex-shrink:0}
+    .cart-btn:hover{background:var(--red3)}
+    .cart-badge{position:absolute;bottom:-3px;right:-3px;background:var(--gold);color:#fff;border-radius:50%;width:17px;height:17px;font-size:.58rem;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid var(--ivory)}
+    .hamburger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px;flex-shrink:0}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--red);border-radius:2px;transition:all .3s}
+    .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .hamburger.open span:nth-child(2){opacity:0}
+    .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    .mobile-menu{display:none;position:fixed;top:80px;left:0;right:0;background:var(--ivory);border-bottom:1px solid var(--border);z-index:199;flex-direction:column;align-items:center;padding:1rem 0;box-shadow:0 10px 30px #c0272d12}
+    .mobile-menu.open{display:flex}
+    .mobile-menu a{padding:.85rem 2rem;text-decoration:none;color:var(--muted);font-weight:700;font-size:.82rem;letter-spacing:1.5px;text-transform:uppercase;width:100%;text-align:center;border-bottom:1px solid var(--ivory2);transition:background .15s}
+    .mobile-menu a:hover{background:var(--ivory2);color:var(--red)}
+
+    /* ── HERO ── */
+    .hero{
+      min-height:100vh;position:relative;overflow:hidden;
+      display:flex;align-items:center;justify-content:center;
+      background:var(--red3);
+    }
+    /* textured pattern */
+    .hero::before{
+      content:'';position:absolute;inset:0;
+      background-image:repeating-linear-gradient(45deg,#ffffff04 0px,#ffffff04 1px,transparent 1px,transparent 8px),
+        repeating-linear-gradient(-45deg,#ffffff04 0px,#ffffff04 1px,transparent 1px,transparent 8px);
+      pointer-events:none;
+    }
+    .hero-glow{position:absolute;inset:0;pointer-events:none}
+    .hero-glow-spot{position:absolute;border-radius:50%;filter:blur(80px)}
+    .gspot1{width:500px;height:500px;background:#c8953a30;top:-100px;right:-100px}
+    .gspot2{width:400px;height:400px;background:#ffffff08;bottom:-100px;left:-80px}
+    /* ornamental border frame */
+    .hero-frame{
+      position:absolute;inset:20px;border:1px solid #ffffff15;border-radius:4px;pointer-events:none;
+    }
+    .hero-frame::before{content:'✦';position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--red3);padding:0 12px;color:var(--gold2);font-size:.9rem}
+    .hero-frame::after{content:'✦';position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);background:var(--red3);padding:0 12px;color:var(--gold2);font-size:.9rem}
+    .hero-inner{position:relative;z-index:2;text-align:center;padding:3.5rem 1.5rem;max-width:700px;animation:heroIn 1s ease both}
+    @keyframes heroIn{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+    .hero-badge{display:inline-flex;align-items:center;gap:.45rem;background:#ffffff15;color:var(--gold2);border:1px solid #ffffff25;border-radius:999px;padding:.38rem 1.2rem;font-size:.7rem;font-weight:700;margin-bottom:1.8rem;letter-spacing:2px;text-transform:uppercase;font-family:'Lato',sans-serif}
+    .hero-logo-wrap{margin:0 auto 1.8rem;position:relative;display:inline-block}
+    .hero-logo-ring{
+      width:130px;height:130px;border-radius:50%;background:var(--red);
+      border:3px solid var(--gold2);
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 0 0 8px #ffffff10, 0 16px 50px #00000060;
+      margin:0 auto;
+    }
+    .hero-logo-text{color:#fff;text-align:center;line-height:1.2}
+    .hero-logo-text .hl1{font-family:'Cinzel',serif;font-size:1rem;font-weight:700;letter-spacing:1px;display:block}
+    .hero-logo-text .hl2{font-family:'Cinzel',serif;font-size:1.3rem;font-weight:700;letter-spacing:1px;display:block}
+    .hero-logo-text .hl3{font-family:'Libre Baskerville',serif;font-size:.55rem;font-weight:400;letter-spacing:2px;color:var(--gold2);margin-top:3px;display:block}
+    .hero h1{font-family:'Cinzel',serif;font-size:clamp(2rem,5.5vw,3.6rem);font-weight:700;color:#fff;line-height:1.2;margin-bottom:.6rem;letter-spacing:1px}
+    .hero h1 em{font-style:italic;font-family:'Libre Baskerville',serif;color:var(--gold2)}
+    .hero-divider{display:flex;align-items:center;justify-content:center;gap:.7rem;margin:.8rem auto 1.2rem}
+    .hero-divider-line{width:70px;height:1px;background:linear-gradient(90deg,transparent,var(--gold2))}
+    .hero-divider-line.r{background:linear-gradient(90deg,var(--gold2),transparent)}
+    .hero-divider span{color:var(--gold2);font-size:.8rem}
+    .hero-sub{color:#ffffff99;max-width:480px;margin:0 auto 2rem;font-size:.95rem;line-height:1.95;font-weight:300}
+    .hero-btns{display:flex;gap:.8rem;justify-content:center;flex-wrap:nowrap;margin-bottom:2.5rem}
+    .btn-primary{background:var(--gold);color:#fff;padding:.85rem 2.2rem;border-radius:999px;border:none;font-weight:700;font-size:.85rem;cursor:pointer;transition:all .2s;letter-spacing:.5px;text-transform:uppercase;font-family:'Lato',sans-serif;box-shadow:0 4px 18px #c8953a50}
+    .btn-primary:hover{background:var(--gold3);transform:translateY(-2px)}
+    .btn-outline{background:transparent;color:#fff;padding:.85rem 2.2rem;border-radius:999px;border:1.5px solid #ffffff50;font-weight:700;font-size:.85rem;cursor:pointer;transition:all .2s;letter-spacing:.5px;text-transform:uppercase;font-family:'Lato',sans-serif}
+    .btn-outline:hover{background:#ffffff15;border-color:#fff}
+    .hero-24hr{display:inline-flex;align-items:center;gap:.5rem;background:#ffffff15;border:1px solid var(--gold2);border-radius:999px;padding:.4rem 1.2rem;color:var(--gold2);font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;font-family:'Lato',sans-serif}
+    .hero-stats{display:flex;justify-content:center;gap:2.5rem;flex-wrap:nowrap;margin-top:1.8rem;background:#ffffff0d;border:1px solid #ffffff18;border-radius:8px;padding:1.3rem 2.5rem}
+    .stat-num{font-family:'Cinzel',serif;font-size:1.6rem;font-weight:700;color:var(--gold2);line-height:1}
+    .stat-label{font-size:.65rem;color:#ffffff80;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;margin-top:.3rem;text-align:center}
+
+    /* ── SECTION ── */
+    .section{padding:5rem 2rem;max-width:1100px;margin:0 auto}
+    .section-head{text-align:center;margin-bottom:2.8rem}
+    .section-head h2{font-family:'Cinzel',serif;font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:700;color:var(--red3)}
+    .section-head p{color:var(--muted);margin-top:.5rem;font-size:.9rem;font-weight:300;letter-spacing:.3px;line-height:1.7}
+
+    /* ── TABS ── */
+    .tabs{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem}
+    .tab{background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:999px;padding:.42rem 1.25rem;font-size:.74rem;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:1px;text-transform:uppercase;font-family:'Lato',sans-serif}
+    .tab.active,.tab:hover{background:var(--red);color:#fff;border-color:var(--red)}
+
+    /* ── MENU GRID ── */
+    .menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:1.6rem}
+    .cake-card{background:#fff;border-radius:8px;overflow:hidden;border:1px solid var(--border);transition:transform .25s,box-shadow .25s;animation:fadeUp .35s ease both}
+    .cake-card:hover{transform:translateY(-6px);box-shadow:0 18px 44px #c0272d15}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    .cake-img-wrap{width:100%;height:210px;overflow:hidden;position:relative;background:var(--ivory2)}
+    .cake-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+    .cake-card:hover .cake-img-wrap img{transform:scale(1.07)}
+    .cake-tag{position:absolute;top:10px;left:10px;background:var(--red);color:#fff;font-size:.62rem;font-weight:700;padding:.22rem .7rem;border-radius:3px;z-index:1;letter-spacing:1px;text-transform:uppercase}
+    .cake-tag.gold{background:var(--gold)}
+    .cake-info{padding:1.3rem}
+    .cake-name{font-family:'Libre Baskerville',serif;font-weight:700;color:var(--dark);font-size:1.1rem;line-height:1.3}
+    .cake-desc{color:var(--muted);font-size:.81rem;margin:.35rem 0 1rem;line-height:1.7;font-weight:300}
+    .cake-footer{display:flex;align-items:center;justify-content:space-between}
+    .cake-price{font-weight:700;font-size:1rem;color:var(--red)}
+    .cake-price small{font-size:.62rem;font-weight:400;color:var(--muted);display:block}
+    .add-btn{background:var(--ivory2);color:var(--red);border:1px solid var(--border);border-radius:999px;padding:.38rem 1rem;cursor:pointer;font-weight:700;font-size:.75rem;transition:all .2s;min-width:68px;letter-spacing:.5px;text-transform:uppercase;font-family:'Lato',sans-serif}
+    .add-btn:hover{background:var(--red);color:#fff;border-color:var(--red)}
+    .add-btn.added{background:#dcfce7;color:#16a34a;border-color:#86efac}
+
+    /* ── 24HR BANNER ── */
+    .banner-24{background:linear-gradient(135deg,var(--red3),var(--red));padding:2.5rem 2rem;text-align:center}
+    .banner-24-inner{max-width:700px;margin:0 auto}
+    .banner-24 h3{font-family:'Cinzel',serif;font-size:1.6rem;font-weight:700;color:#fff;margin-bottom:.5rem}
+    .banner-24 p{color:#ffffff99;font-size:.9rem;font-weight:300;line-height:1.8}
+    .banner-24-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:#fff;border-radius:999px;padding:.6rem 2rem;font-weight:700;font-size:.9rem;letter-spacing:1px;text-transform:uppercase;margin-top:1.2rem;font-family:'Lato',sans-serif;text-decoration:none;cursor:pointer;transition:background .2s}
+    .banner-24-badge:hover{background:var(--gold3)}
+
+    /* ── GALLERY ── */
+    .gallery-bg{background:var(--ivory2);padding:5rem 2rem}
+    .gallery-inner{max-width:1100px;margin:0 auto}
+    .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:1rem;margin-top:2rem}
+    .gallery-item{aspect-ratio:1;border-radius:8px;overflow:hidden;border:1px solid var(--border);cursor:pointer;transition:transform .2s,box-shadow .2s;position:relative;background:var(--ivory3)}
+    .gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .35s}
+    .gallery-item:hover{transform:scale(1.04);box-shadow:0 10px 28px #c0272d22}
+    .gallery-item:hover img{transform:scale(1.1)}
+    .gallery-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,#1a0808cc);color:#fff;font-size:.67rem;font-weight:700;padding:.5rem .6rem .4rem;text-align:center;letter-spacing:1px;text-transform:uppercase}
+    .gallery-order-btn{position:absolute;top:8px;right:8px;background:var(--gold);color:#fff;border:none;border-radius:3px;padding:.25rem .65rem;font-size:.63rem;font-weight:700;cursor:pointer;opacity:0;transition:opacity .2s;font-family:'Lato',sans-serif;letter-spacing:.5px}
+    .gallery-item:hover .gallery-order-btn{opacity:1}
+    .gallery-cta{text-align:center;margin-top:2.5rem}
+    .gallery-cta p{color:var(--muted);font-size:.85rem;margin-bottom:1rem;font-weight:300}
+    .insta-btn{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:#fff;border:none;border-radius:999px;padding:.75rem 1.8rem;font-weight:700;font-size:.88rem;cursor:pointer;text-decoration:none;transition:opacity .2s;font-family:'Lato',sans-serif;letter-spacing:.5px}
+    .insta-btn:hover{opacity:.88}
+
+    /* ── CUSTOM ── */
+    .custom-wrap{padding:2rem 2rem 3.5rem;max-width:1100px;margin:0 auto}
+    .custom-section{
+      background:var(--red3);border-radius:8px;padding:4rem 2rem;text-align:center;
+      border:1px solid var(--red2);position:relative;overflow:hidden;
+    }
+    .custom-section::before{
+      content:'';position:absolute;inset:0;
+      background-image:repeating-linear-gradient(45deg,#ffffff04 0px,#ffffff04 1px,transparent 1px,transparent 10px);
+      pointer-events:none;
+    }
+    .custom-section h3{font-family:'Cinzel',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;color:#fff;margin-bottom:.6rem;position:relative}
+    .custom-section p{color:#ffffff80;font-size:.93rem;max-width:520px;margin:0 auto 2rem;line-height:1.95;font-weight:300;position:relative}
+    .feat-pills{display:flex;justify-content:center;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem;position:relative}
+    .feat-pill{background:#ffffff15;border:1px solid #ffffff25;border-radius:999px;padding:.4rem 1.1rem;font-size:.75rem;color:var(--gold2);font-weight:700;white-space:nowrap;letter-spacing:.5px;text-transform:uppercase}
+
+    /* ── CONTACT ── */
+    .contact-section{background:linear-gradient(160deg,#1a0808 0%,#2a0c0c 100%);padding:5.5rem 2rem}
+    .contact-inner{max-width:1100px;margin:0 auto}
+    .contact-inner h2{text-align:center;font-family:'Cinzel',serif;font-size:clamp(1.9rem,3.5vw,2.5rem);font-weight:700;color:#fff;margin-bottom:.4rem}
+    .contact-sub{text-align:center;color:#a07070;font-size:.88rem;margin-bottom:.4rem;font-weight:300;letter-spacing:.5px}
+    .cdivider{display:flex;align-items:center;justify-content:center;gap:.7rem;margin:.5rem auto 2.5rem}
+    .cdiv-line{width:50px;height:1px;background:linear-gradient(90deg,transparent,var(--gold2))}
+    .cdiv-line.r{background:linear-gradient(90deg,var(--gold2),transparent)}
+    .cdiv-diamond{width:6px;height:6px;background:var(--gold2);transform:rotate(45deg)}
+    .contact-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.1rem;margin-bottom:2.5rem}
+    .cc{background:#ffffff08;border:1px solid #ffffff18;border-radius:12px;padding:1.8rem 1.3rem;text-align:center;transition:all .25s;text-decoration:none;display:block;cursor:default}
+    .cc.clickable{cursor:pointer}
+    .cc.clickable:hover{background:#ffffff16;transform:translateY(-3px);box-shadow:0 8px 24px #00000040}
+    .cc .cicon{font-size:2rem;margin-bottom:.7rem;display:block}
+    .cc h4{color:var(--gold2);font-size:.84rem;font-weight:700;margin-bottom:.4rem;letter-spacing:1px;text-transform:uppercase;font-family:'Cinzel',serif}
+    .cc p{color:#c0908e;font-size:.81rem;line-height:1.75;font-weight:300}
+    .cc-link{color:var(--gold2);font-weight:700;font-size:.81rem;display:inline-block;margin-top:.4rem}
+    .social-row{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+    .social-btn{display:inline-flex;align-items:center;gap:.55rem;border-radius:999px;padding:.8rem 1.9rem;font-weight:700;font-size:.9rem;cursor:pointer;text-decoration:none;border:none;transition:all .2s;white-space:nowrap;letter-spacing:.5px;text-transform:uppercase;font-family:'Lato',sans-serif}
+    .social-btn:hover{opacity:.87;transform:translateY(-2px)}
+    .wa-btn{background:#25d366;color:#fff;box-shadow:0 4px 14px #25d36640}
+    .ig-btn{background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:#fff;box-shadow:0 4px 14px #fd1d1d40}
+    .contact-tagline{text-align:center;color:#c0908e;font-size:.72rem;margin-top:2rem;letter-spacing:1.5px;text-transform:uppercase}
+
+    /* ── FLOAT ── */
+    .float-wa{position:fixed;bottom:1.5rem;right:1.5rem;z-index:150;background:#25d366;color:#fff;border:none;border-radius:50%;width:56px;height:56px;font-size:1.4rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 22px #25d36670;cursor:pointer;text-decoration:none;transition:transform .2s}
+    .float-wa:hover{transform:scale(1.12)}
+    footer{background:#0d0404;color:#c0908e;text-align:center;padding:1.5rem;font-size:.76rem;letter-spacing:1px}
+    footer span{color:var(--gold2);font-weight:700}
+    footer a{color:var(--gold2);text-decoration:none}
+
+    /* ── CART ── */
+    .overlay{display:none;position:fixed;inset:0;background:#0009;z-index:300;justify-content:flex-end}
+    .overlay.open{display:flex}
+    .cart-panel{background:#fff;width:390px;max-width:100vw;height:100%;display:flex;flex-direction:column}
+    .cart-header{background:var(--ivory);padding:1.2rem 1.5rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)}
+    .cart-header h3{color:var(--red);font-family:'Cinzel',serif;font-weight:700;font-size:1.1rem}
+    .close-btn{background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--muted)}
+    .close-btn:hover{color:var(--red)}
+    .cart-items{flex:1;overflow-y:auto;padding:1rem 1.4rem}
+    .empty-cart{text-align:center;color:var(--muted);margin-top:3rem;font-size:.9rem;font-weight:300}
+    .cart-item{display:flex;align-items:center;gap:.8rem;padding:.8rem 0;border-bottom:1px solid var(--ivory2)}
+    .cart-item-img{width:48px;height:48px;border-radius:6px;object-fit:cover;flex-shrink:0;background:var(--ivory2)}
+    .cart-item-info{flex:1;min-width:0}
+    .cart-item-name{font-weight:700;font-size:.84rem;color:var(--dark);font-family:'Libre Baskerville',serif}
+    .cart-item-price{color:var(--red);font-size:.81rem;font-weight:700}
+    .qty-ctrl{display:flex;align-items:center;gap:.4rem;margin-top:.25rem}
+    .qty-btn{background:var(--ivory2);border:1px solid var(--border);border-radius:3px;width:22px;height:22px;cursor:pointer;font-weight:700;font-size:.8rem;color:var(--red);display:flex;align-items:center;justify-content:center}
+    .qty-btn:hover{background:var(--red);color:#fff}
+    .qty-num{font-size:.84rem;font-weight:700;min-width:18px;text-align:center}
+    .remove-btn{background:none;border:none;color:#fca5a5;cursor:pointer;font-size:1rem;flex-shrink:0}
+    .remove-btn:hover{color:#ef4444}
+    .cart-footer{padding:1.2rem 1.5rem;border-top:1px solid var(--border);background:var(--ivory)}
+    .cart-total{display:flex;justify-content:space-between;font-weight:700;font-size:.98rem;margin-bottom:1rem;color:var(--dark)}
+    .checkout-btn{width:100%;background:var(--red);color:#fff;border:none;border-radius:999px;padding:.85rem;font-weight:700;font-size:.9rem;cursor:pointer;transition:background .2s;text-transform:uppercase;letter-spacing:.5px;font-family:'Lato',sans-serif}
+    .checkout-btn:hover{background:var(--red3)}
+
+    /* ── MODALS ── */
+    .modal-overlay{display:none;position:fixed;inset:0;background:#0009;z-index:400;align-items:center;justify-content:center;padding:1rem}
+    .modal-overlay.open{display:flex}
+    .modal{background:#fff;border-radius:10px;padding:2rem;width:100%;max-width:440px;max-height:90vh;overflow-y:auto}
+    .modal h3{color:var(--red);font-family:'Cinzel',serif;font-weight:700;margin-bottom:1.2rem;font-size:1.25rem}
+    .form-group{margin-bottom:1rem}
+    .form-group label{display:block;font-size:.72rem;font-weight:700;color:var(--muted);margin-bottom:.32rem;letter-spacing:1px;text-transform:uppercase}
+    .form-group input,.form-group textarea,.form-group select{width:100%;border:1.5px solid var(--border);border-radius:6px;padding:.62rem .9rem;font-size:.9rem;outline:none;background:var(--ivory);color:var(--dark);transition:border .2s;font-family:'Lato',sans-serif;font-weight:300}
+    .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--red)}
+    .form-group textarea{height:80px;resize:vertical}
+    .cod-badge{background:#fdf0e0;border:1px solid var(--border);border-radius:6px;padding:.45rem .9rem;font-size:.78rem;color:var(--gold3);font-weight:700;display:inline-flex;align-items:center;gap:.35rem;margin-bottom:.9rem}
+    .order-summary{background:var(--ivory);border-radius:8px;padding:.9rem;margin-bottom:.9rem;font-size:.82rem}
+    .order-summary-row{display:flex;justify-content:space-between;padding:.22rem 0;color:var(--muted)}
+    .order-summary-total{display:flex;justify-content:space-between;padding:.45rem 0 0;border-top:1px solid var(--border);font-weight:700;color:var(--red);margin-top:.3rem}
+    .place-btn{width:100%;background:var(--red);color:#fff;border:none;border-radius:999px;padding:.85rem;font-weight:700;font-size:.9rem;cursor:pointer;margin-top:.5rem;display:flex;align-items:center;justify-content:center;gap:.5rem;text-transform:uppercase;letter-spacing:.5px;font-family:'Lato',sans-serif}
+    .place-btn:hover{background:var(--red3)}
+    .cancel-btn{width:100%;background:none;border:1.5px solid var(--border);border-radius:999px;padding:.72rem;font-weight:700;font-size:.85rem;cursor:pointer;color:var(--muted);margin-top:.5rem;text-transform:uppercase;letter-spacing:.5px;font-family:'Lato',sans-serif}
+    .cancel-btn:hover{border-color:var(--red);color:var(--red)}
+    .success-modal{text-align:center}
+    .success-modal .check{font-size:3rem;margin-bottom:.5rem}
+    .success-modal h3{color:#059669;font-family:'Cinzel',serif}
+    .success-modal p{color:var(--muted);margin:.6rem 0 1.1rem;font-size:.88rem;line-height:1.85;font-weight:300}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:640px){
+      nav{height:70px;padding:0 1rem}
+      .nav-links{display:none}
+      .hamburger{display:flex}
+      .mobile-menu{top:70px}
+      .hero{padding:2rem 1.2rem}
+      .hero h1{font-size:1.9rem}
+      .hero-stats{gap:1.5rem;padding:1rem 1.2rem}
+      .section{padding:3.5rem 1.1rem}
+      .menu-grid{grid-template-columns:1fr;gap:1rem}
+      .gallery-grid{grid-template-columns:repeat(2,1fr);gap:.6rem}
+      .custom-wrap{padding:1.5rem 1.1rem 2.5rem}
+      .custom-section{padding:2.8rem 1.2rem}
+      .contact-cards{grid-template-columns:1fr 1fr}
+      .social-row{flex-direction:column;align-items:center}
+      .float-wa{bottom:1rem;right:1rem;width:50px;height:50px;font-size:1.2rem}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="logo" href="#home">
+      <div class="logo-circle">
+        <div class="logo-circle-inner">
+          <span class="ak">AK</span>
+        </div>
+      </div>
+      <div class="logo-text">
+        <div class="brand">Anaya's Kitchen</div>
+        <div class="sub">CakeHouse · Lahore</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#custom">Custom</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="cart-btn" onclick="openCart()" aria-label="Cart">🛒<span class="cart-badge" id="cartBadge">0</span></button>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home" onclick="closeMenu()">Home</a>
+    <a href="#menu" onclick="closeMenu()">Menu</a>
+    <a href="#gallery" onclick="closeMenu()">Gallery</a>
+    <a href="#custom" onclick="closeMenu()">Custom Cake</a>
+    <a href="#contact" onclick="closeMenu()">Contact</a>
+  </div>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="hero-glow">
+      <div class="hero-glow-spot gspot1"></div>
+      <div class="hero-glow-spot gspot2"></div>
+    </div>
+    <div class="hero-frame"></div>
+    <div class="hero-inner">
+      <div class="hero-badge">🎂 Homemade · Lahore</div>
+      <div class="hero-logo-wrap">
+        <div class="hero-logo-ring">
+          <div class="hero-logo-text">
+            <span class="hl1">ANAYA'S</span>
+            <span class="hl2">KITCHEN</span>
+            <span class="hl3">CakeHouse</span>
+          </div>
+        </div>
+      </div>
+      <h1>The Art of<br><em>Baking, Perfected</em></h1>
+      <div class="hero-divider">
+        <div class="hero-divider-line"></div>
+        <span>✦</span>
+        <div class="hero-divider-line r"></div>
+      </div>
+      <p class="hero-sub">Beautifully crafted cakes for every milestone — birthdays, weddings, and every occasion worth celebrating. Delivered fresh across Lahore.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">Order Now</button>
+        <button class="btn-outline" onclick="document.getElementById('custom').scrollIntoView({behavior:'smooth'})">Custom Cake</button>
+      </div>
+      <div class="hero-24hr">🕐 24-Hour Delivery Available</div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">800+</div>
+          <div class="stat-label">Happy Orders</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Homemade</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">5 ★</div>
+          <div class="stat-label">Rated</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="section" id="menu">
+    <div class="section-head">
+      <h2>Our Menu</h2>
+      <div class="orn"><div class="orn-line"></div><div class="orn-diamond"></div><div class="orn-line r"></div></div>
+      <p>Every cake handcrafted with love — made fresh for your occasion</p>
+    </div>
+    <div class="tabs" id="tabBar"></div>
+    <div class="menu-grid" id="menuGrid"></div>
+  </section>
+
+  <!-- 24HR BANNER -->
+  <div class="banner-24">
+    <div class="banner-24-inner">
+      <h3>24-Hour Delivery Across Lahore</h3>
+      <p>Order anytime — morning, afternoon or midnight. We deliver fresh cakes to your doorstep at any hour, any day.</p>
+      <a class="banner-24-badge" href="https://wa.me/923228066671" target="_blank">🕐 Order Now</a>
+    </div>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="gallery-bg" id="gallery">
+    <div class="gallery-inner">
+      <div class="section-head">
+        <h2>Previous Creations</h2>
+        <div class="orn"><div class="orn-line"></div><div class="orn-diamond"></div><div class="orn-line r"></div></div>
+        <p>A glimpse of our handcrafted work — tap any cake to order the same</p>
+      </div>
+      <div class="gallery-grid" id="galleryGrid"></div>
+      <div class="gallery-cta">
+        <p>See hundreds more creations on our Instagram</p>
+        <a class="insta-btn" href="https://www.instagram.com/anayaskitchenlahore?igsh=NXI2czIzN3ExeXB4" target="_blank">📸 View Full Gallery on Instagram</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUSTOM -->
+  <div class="custom-wrap" id="custom">
+    <div class="custom-section">
+      <h3>Custom Cake Orders</h3>
+      <div class="orn" style="margin-bottom:1rem"><div class="orn-line" style="background:linear-gradient(90deg,transparent,var(--gold2))"></div><div class="orn-diamond"></div><div class="orn-line r" style="background:linear-gradient(90deg,var(--gold2),transparent)"></div></div>
+      <p>Your vision, our craft. We create bespoke cakes for birthdays, weddings, anniversaries, baby showers and every special occasion.</p>
+      <div class="feat-pills">
+        <span class="feat-pill">🎂 Themed Cakes</span>
+        <span class="feat-pill">🌸 Flower Cakes</span>
+        <span class="feat-pill">🏆 Tier Cakes</span>
+        <span class="feat-pill">👶 Month Cakes</span>
+        <span class="feat-pill">💍 Wedding Cakes</span>
+        <span class="feat-pill">🧁 Cupcake Sets</span>
+        <span class="feat-pill">🍫 Brownie Boxes</span>
+      </div>
+      <button class="btn-primary" onclick="openCustomModal()">Request Custom Cake ✨</button>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="contact-section" id="contact">
+    <div class="contact-inner">
+      <h2>Get in Touch</h2>
+      <p class="contact-sub">We'd love to bake something special for you</p>
+      <div class="cdivider">
+        <div class="cdiv-line"></div>
+        <div class="cdiv-diamond"></div>
+        <div class="cdiv-line r"></div>
+      </div>
+      <div class="contact-cards">
+        <a class="cc clickable" href="https://wa.me/923228066671" target="_blank">
+          <div class="cicon">💬</div><h4>WhatsApp</h4>
+          <p>Chat for orders, pricing & custom queries</p>
+          <span class="cc-link">+92 322 8066671 →</span>
+        </a>
+        <a class="cc clickable" href="https://www.instagram.com/anayaskitchenlahore?igsh=NXI2czIzN3ExeXB4" target="_blank">
+          <div class="cicon">📸</div><h4>Instagram</h4>
+          <p>Browse our portfolio & DM to order</p>
+          <span class="cc-link">@anayaskitchenlahore →</span>
+        </a>
+        <div class="cc" style="cursor:default">
+          <div class="cicon">📍</div><h4>Location</h4>
+          <p>Lahore<br>Home delivery across city</p>
+        </div>
+        <div class="cc" style="cursor:default">
+          <div class="cicon">🕐</div><h4>Delivery Hours</h4>
+          <p>24 Hours a Day<br>7 Days a Week</p>
+        </div>
+      </div>
+      <div class="social-row">
+        <a class="social-btn wa-btn" href="https://wa.me/923228066671" target="_blank">💬 Chat on WhatsApp</a>
+        <a class="social-btn ig-btn" href="https://www.instagram.com/anayaskitchenlahore?igsh=NXI2czIzN3ExeXB4" target="_blank">📸 Follow on Instagram</a>
+      </div>
+      <p class="contact-tagline">Anaya's Kitchen CakeHouse · Crafted with Love · Lahore</p>
+    </div>
+  </div>
+
+  <footer>
+    <p><span>Anaya's Kitchen CakeHouse</span> · Lahore &nbsp;|&nbsp; © 2026 &nbsp;|&nbsp;
+      <a href="https://www.instagram.com/anayaskitchenlahore?igsh=NXI2czIzN3ExeXB4" target="_blank">@anayaskitchenlahore</a>
+    </p>
+  </footer>
+
+  <a class="float-wa" href="https://wa.me/923228066671" target="_blank" title="Chat on WhatsApp">💬</a>
+
+  <!-- CART OVERLAY -->
+  <div class="overlay" id="cartOverlay" onclick="closeCartOutside(event)">
+    <div class="cart-panel">
+      <div class="cart-header">
+        <h3>🛒 Your Cart</h3>
+        <button class="close-btn" onclick="closeCart()">✕</button>
+      </div>
+      <div class="cart-items" id="cartItems">
+        <p class="empty-cart">Your cart is empty<br><small>Add some cakes!</small></p>
+      </div>
+      <div class="cart-footer" id="cartFooter" style="display:none">
+        <div class="cart-total"><span>Total</span><span id="cartTotal">Rs. 0</span></div>
+        <button class="checkout-btn" onclick="openCheckout()">Proceed to Order (COD) →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKOUT MODAL -->
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="modal" id="checkoutContent">
+      <h3>Place Your Order</h3>
+      <div class="cod-badge">💵 Cash on Delivery</div>
+      <div class="order-summary" id="orderSummary"></div>
+      <div class="form-group"><label>Full Name</label><input type="text" id="custName" placeholder="Your full name"/></div>
+      <div class="form-group"><label>Phone Number</label><input type="tel" id="custPhone" placeholder="03XX-XXXXXXX"/></div>
+      <div class="form-group"><label>Delivery Address</label><textarea id="custAddr" placeholder="House #, Street, Area, Lahore"></textarea></div>
+      <div class="form-group"><label>Preferred Delivery Time (optional)</label><input type="text" id="custTime" placeholder="e.g. Tonight 9pm, Tomorrow morning..."/></div>
+      <div class="form-group"><label>Special Instructions (optional)</label><textarea id="custNote" placeholder="Message on cake, flavour preference..."></textarea></div>
+      <button class="place-btn" onclick="placeOrder()">Place Order 🎂</button>
+      <button class="cancel-btn" onclick="closeCheckout()">Cancel</button>
+    </div>
+  </div>
+
+  <!-- CUSTOM MODAL -->
+  <div class="modal-overlay" id="customModal">
+    <div class="modal">
+      <h3>Custom Cake Request</h3>
+      <div class="form-group"><label>Your Name</label><input type="text" id="cName" placeholder="Full name"/></div>
+      <div class="form-group"><label>WhatsApp Number</label><input type="tel" id="cPhone" placeholder="03XX-XXXXXXX"/></div>
+      <div class="form-group"><label>Cake Type</label>
+        <select id="cType">
+          <option value="">Select cake type...</option>
+          <option>Birthday Cake</option><option>Wedding Cake</option><option>Tier Cake</option>
+          <option>Flower Cake</option><option>Theme Cake</option><option>Month Cake</option>
+          <option>Cupcake Set</option><option>Brownie Box</option><option>Other</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Size</label>
+        <select id="cSize">
+          <option value="">Select size...</option>
+          <option>Size 1 (Small)</option><option>Size 2 (Medium)</option>
+          <option>Size 3 (Large)</option><option>2.5 Pounds</option>
+          <option>Not sure — discuss with baker</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Flavour</label>
+        <select id="cFlavour">
+          <option value="">Select flavour...</option>
+          <option>Chocolate</option><option>Vanilla</option><option>Red Velvet</option>
+          <option>Strawberry</option><option>Caramel</option><option>Black Forest</option>
+          <option>Lemon</option><option>Mix / Surprise me</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Event Date & Time</label><input type="datetime-local" id="cDate"/></div>
+      <div class="form-group"><label>Design / Message on Cake</label><textarea id="cDesc" placeholder="Describe your dream cake — theme, colours, message..."></textarea></div>
+      <button class="place-btn" onclick="submitCustom()">Send Request ✨</button>
+      <button class="cancel-btn" onclick="closeCustomModal()">Cancel</button>
+    </div>
+  </div>
+
+  <!-- GALLERY ORDER MODAL -->
+  <div class="modal-overlay" id="galleryOrderModal">
+    <div class="modal">
+      <h3 id="galleryOrderTitle">Order This Cake</h3>
+      <p style="color:var(--muted);font-size:.84rem;margin-bottom:1.2rem;line-height:1.7;font-weight:300">Fill in your details and we'll confirm on WhatsApp!</p>
+      <div class="form-group"><label>Full Name</label><input type="text" id="gName" placeholder="Your full name"/></div>
+      <div class="form-group"><label>Phone Number</label><input type="tel" id="gPhone" placeholder="03XX-XXXXXXX"/></div>
+      <div class="form-group"><label>Delivery Address</label><textarea id="gAddr" placeholder="House #, Street, Area, Lahore"></textarea></div>
+      <div class="form-group"><label>Preferred Delivery Time</label><input type="text" id="gTime" placeholder="e.g. Tonight 10pm, Tomorrow 2pm..."/></div>
+      <div class="form-group"><label>Special Requests (optional)</label><textarea id="gNote" placeholder="Message on cake, colour preference..."></textarea></div>
+      <button class="place-btn" onclick="submitGalleryOrder()">Place Order 🎂</button>
+      <button class="cancel-btn" onclick="closeGalleryOrderModal()">Cancel</button>
+    </div>
+  </div>
+
+  <script>
+    const WA = '923228066671';
+
+    const categories = {
+      'Birthday Cakes': [
+        {id:1,img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop',name:'Classic Birthday',desc:'Soft sponge with cream frosting & your personalised message',price:1500,tag:'Popular',tagClass:''},
+        {id:2,img:'https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=400&h=300&fit=crop',name:'Themed Cake',desc:'Cartoons, sports, florals & any theme you love',price:2000,tag:'Custom',tagClass:'gold'},
+        {id:3,img:'https://images.unsplash.com/photo-1568051243851-f9b136146e97?w=400&h=300&fit=crop',name:'Tier Birthday',desc:'2–3 tier stacked grand celebration cake',price:3000,tag:'Premium',tagClass:'gold'},
+      ],
+      'Flower Cakes': [
+        {id:4,img:'https://images.unsplash.com/photo-1607478900766-efe13248b125?w=400&h=300&fit=crop',name:'Floral Cream Cake',desc:'Delicate buttercream flowers on a light airy sponge',price:2000,tag:'Trending',tagClass:''},
+        {id:5,img:'https://images.unsplash.com/photo-1559620192-032c4bc4674e?w=400&h=300&fit=crop',name:'Rose Bouquet Cake',desc:'Stunning red & pink roses, perfect for gifting',price:2200,tag:'Bestseller',tagClass:'gold'},
+      ],
+      'Cupcakes': [
+        {id:6,img:'https://images.unsplash.com/photo-1614707267537-b85aaf00c4b7?w=400&h=300&fit=crop',name:'Cupcake Set (6 pcs)',desc:'Assorted flavours with beautiful swirl frosting',price:900,tag:'',tagClass:''},
+        {id:7,img:'https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?w=400&h=300&fit=crop',name:'Choco Cupcakes (6)',desc:'Rich dark chocolate sponge & silky ganache',price:950,tag:'',tagClass:''},
+      ],
+      'Special': [
+        {id:8,img:'https://images.unsplash.com/photo-1535141192574-5d4897c12636?w=400&h=300&fit=crop',name:'Month Milestone',desc:'Sweet baby milestone monthly cake',price:1800,tag:'Cute',tagClass:''},
+        {id:9,img:'https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=400&h=300&fit=crop',name:'Brownie Box',desc:'9 fudgy homemade chocolate brownies',price:1200,tag:'Gift',tagClass:'gold'},
+        {id:10,img:'https://images.unsplash.com/photo-1549488344-cbb6c34fe0fd?w=400&h=300&fit=crop',name:'Wedding Cake',desc:'Elegant white & floral for your most special day',price:4500,tag:'Premium',tagClass:'gold'},
+        {id:11,img:'https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&h=300&fit=crop',name:'Anniversary Cake',desc:'Romantic design crafted for your special day',price:2500,tag:'New',tagClass:''},
+      ]
+    };
+
+    const galleryItems = [
+      {img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=300&fit=crop',label:'Birthday Cake'},
+      {img:'https://images.unsplash.com/photo-1607478900766-efe13248b125?w=300&h=300&fit=crop',label:'Floral Cake'},
+      {img:'https://images.unsplash.com/photo-1568051243851-f9b136146e97?w=300&h=300&fit=crop',label:'Tier Cake'},
+      {img:'https://images.unsplash.com/photo-1614707267537-b85aaf00c4b7?w=300&h=300&fit=crop',label:'Cupcakes'},
+      {img:'https://images.unsplash.com/photo-1535141192574-5d4897c12636?w=300&h=300&fit=crop',label:'Month Cake'},
+      {img:'https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=300&h=300&fit=crop',label:'Brownies'},
+      {img:'https://images.unsplash.com/photo-1549488344-cbb6c34fe0fd?w=300&h=300&fit=crop',label:'Wedding'},
+      {img:'https://images.unsplash.com/photo-1559620192-032c4bc4674e?w=300&h=300&fit=crop',label:'Rose Cake'},
+      {img:'https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=300&h=300&fit=crop',label:'Theme Cake'},
+      {img:'https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?w=300&h=300&fit=crop',label:'Choco Cups'},
+      {img:'https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=300&h=300&fit=crop',label:'Anniversary'},
+      {img:'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=300&h=300&fit=crop',label:'Special'},
+    ];
+
+    let cart={}, activeTab=Object.keys(categories)[0], currentGalleryLabel='';
+    const allCakes=()=>Object.values(categories).flat();
+
+    function renderTabs(){
+      document.getElementById('tabBar').innerHTML=Object.keys(categories).map(k=>
+        `<button class="tab${k===activeTab?' active':''}" onclick="switchTab('${k}')">${k}</button>`).join('');
+    }
+    function switchTab(t){activeTab=t;renderTabs();renderMenu();}
+    function renderMenu(){
+      document.getElementById('menuGrid').innerHTML=categories[activeTab].map((c,i)=>`
+        <div class="cake-card" style="animation-delay:${i*.07}s">
+          <div class="cake-img-wrap">
+            ${c.tag?`<span class="cake-tag ${c.tagClass||''}">${c.tag}</span>`:''}
+            <img src="${c.img}" alt="${c.name}" loading="lazy"/>
+          </div>
+          <div class="cake-info">
+            <div class="cake-name">${c.name}</div>
+            <div class="cake-desc">${c.desc}</div>
+            <div class="cake-footer">
+              <div class="cake-price">Rs. ${c.price.toLocaleString()}<small>Starting price</small></div>
+              <button class="add-btn" onclick="addToCart(${c.id},this)">+ Cart</button>
+            </div>
+          </div>
+        </div>`).join('');
+    }
+    function renderGallery(){
+      document.getElementById('galleryGrid').innerHTML=galleryItems.map(g=>`
+        <div class="gallery-item" onclick="openGalleryOrder('${g.label}')">
+          <img src="${g.img}" alt="${g.label}" loading="lazy"/>
+          <div class="gallery-label">${g.label}</div>
+          <button class="gallery-order-btn" onclick="event.stopPropagation();openGalleryOrder('${g.label}')">Order Same</button>
+        </div>`).join('');
+    }
+    function addToCart(id,btn){
+      cart[id]=(cart[id]||0)+1;updateBadge();renderCartItems();
+      if(btn){const o=btn.textContent;btn.textContent='✓ Added';btn.classList.add('added');btn.disabled=true;
+        setTimeout(()=>{btn.textContent=o;btn.classList.remove('added');btn.disabled=false;},1100);}
+    }
+    function changeQty(id,d){cart[id]=(cart[id]||0)+d;if(cart[id]<=0)delete cart[id];updateBadge();renderCartItems();}
+    function removeFromCart(id){delete cart[id];updateBadge();renderCartItems();}
+    function updateBadge(){document.getElementById('cartBadge').textContent=Object.values(cart).reduce((a,b)=>a+b,0);}
+    function getTotal(){return Object.entries(cart).reduce((s,[id,q])=>{const c=allCakes().find(x=>x.id==id);return s+(c?c.price*q:0);},0);}
+    function renderCartItems(){
+      const el=document.getElementById('cartItems'),footer=document.getElementById('cartFooter'),keys=Object.keys(cart);
+      if(!keys.length){el.innerHTML='<p class="empty-cart">Your cart is empty<br><small>Add some cakes!</small></p>';footer.style.display='none';return;}
+      footer.style.display='block';
+      el.innerHTML=keys.map(id=>{const c=allCakes().find(x=>x.id==id);return`
+        <div class="cart-item">
+          <img class="cart-item-img" src="${c.img}" alt="${c.name}"/>
+          <div class="cart-item-info">
+            <div class="cart-item-name">${c.name}</div>
+            <div class="cart-item-price">Rs. ${(c.price*cart[id]).toLocaleString()}</div>
+            <div class="qty-ctrl">
+              <button class="qty-btn" onclick="changeQty(${id},-1)">−</button>
+              <span class="qty-num">${cart[id]}</span>
+              <button class="qty-btn" onclick="changeQty(${id},1)">+</button>
+            </div>
+          </div>
+          <button class="remove-btn" onclick="removeFromCart(${id})">🗑</button>
+        </div>`;}).join('');
+      document.getElementById('cartTotal').textContent='Rs. '+getTotal().toLocaleString();
+    }
+    function openCart(){document.getElementById('cartOverlay').classList.add('open');}
+    function closeCart(){document.getElementById('cartOverlay').classList.remove('open');}
+    function closeCartOutside(e){if(e.target===document.getElementById('cartOverlay'))closeCart();}
+    function openCheckout(){
+      closeCart();
+      document.getElementById('orderSummary').innerHTML=Object.keys(cart).map(id=>{
+        const c=allCakes().find(x=>x.id==id);
+        return`<div class="order-summary-row"><span>${c.name} x${cart[id]}</span><span>Rs. ${(c.price*cart[id]).toLocaleString()}</span></div>`;
+      }).join('')+`<div class="order-summary-total"><span>Total</span><span>Rs. ${getTotal().toLocaleString()}</span></div>`;
+      document.getElementById('checkoutModal').classList.add('open');
+    }
+    function closeCheckout(){document.getElementById('checkoutModal').classList.remove('open');}
+    function placeOrder(){
+      const n=document.getElementById('custName').value.trim(),
+            p=document.getElementById('custPhone').value.trim(),
+            a=document.getElementById('custAddr').value.trim(),
+            t=document.getElementById('custTime').value.trim(),
+            note=document.getElementById('custNote').value.trim();
+      if(!n||!p||!a){alert('Please fill in all required fields');return;}
+      const items=Object.keys(cart).map(id=>{const c=allCakes().find(x=>x.id==id);return`  • ${c.name} x${cart[id]} — Rs. ${(c.price*cart[id]).toLocaleString()}`;}).join('\n');
+      const msg=`🎂 *New Order - Anaya's Kitchen CakeHouse*\n\n*Customer:* ${n}\n*Phone:* ${p}\n*Address:* ${a}${t?`\n*Delivery Time:* ${t}`:''}\n\n*Order Items:*\n${items}\n\n*Total:* Rs. ${getTotal().toLocaleString()}\n*Payment:* Cash on Delivery (COD)${note?`\n\n*Special Instructions:* ${note}`:''}`;
+      window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`,'_blank');
+      cart={};updateBadge();renderCartItems();closeCheckout();
+      document.getElementById('checkoutContent').innerHTML=`
+        <div class="success-modal"><div class="check">🎉</div><h3>Order Sent!</h3>
+        <p>Your order has been sent to WhatsApp!<br>We'll confirm and deliver to your doorstep.<br><br>💵 Keep cash ready for COD delivery.</p>
+        <button class="place-btn" onclick="resetOrder()">Continue Shopping</button></div>`;
+    }
+    function resetOrder(){
+      closeCheckout();
+      document.getElementById('checkoutContent').innerHTML=`<h3>Place Your Order</h3>
+        <div class="cod-badge">💵 Cash on Delivery</div>
+        <div class="order-summary" id="orderSummary"></div>
+        <div class="form-group"><label>Full Name</label><input type="text" id="custName" placeholder="Your full name"/></div>
+        <div class="form-group"><label>Phone Number</label><input type="tel" id="custPhone" placeholder="03XX-XXXXXXX"/></div>
+        <div class="form-group"><label>Delivery Address</label><textarea id="custAddr" placeholder="House #, Street, Area, Lahore"></textarea></div>
+        <div class="form-group"><label>Preferred Delivery Time (optional)</label><input type="text" id="custTime" placeholder="e.g. Tonight 9pm, Tomorrow morning..."/></div>
+        <div class="form-group"><label>Special Instructions (optional)</label><textarea id="custNote" placeholder="Message on cake, flavour..."></textarea></div>
+        <button class="place-btn" onclick="placeOrder()">Place Order 🎂</button>
+        <button class="cancel-btn" onclick="closeCheckout()">Cancel</button>`;
+    }
+    function openCustomModal(){document.getElementById('customModal').classList.add('open');}
+    function closeCustomModal(){document.getElementById('customModal').classList.remove('open');}
+    function submitCustom(){
+      const n=document.getElementById('cName').value.trim(),p=document.getElementById('cPhone').value.trim(),t=document.getElementById('cType').value,s=document.getElementById('cSize').value,f=document.getElementById('cFlavour').value,d=document.getElementById('cDate').value,desc=document.getElementById('cDesc').value.trim();
+      if(!n||!p||!t){alert('Please fill name, phone & cake type');return;}
+      const msg=`🎨 *Custom Cake Request - Anaya's Kitchen CakeHouse*\n\n*Name:* ${n}\n*Phone:* ${p}\n*Cake Type:* ${t}${s?`\n*Size:* ${s}`:''}${f?`\n*Flavour:* ${f}`:''}${d?`\n*Event Date/Time:* ${d}`:''}${desc?`\n*Design/Message:* ${desc}`:''}`;
+      window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`,'_blank');
+      document.querySelector('#customModal .modal').innerHTML=`
+        <div class="success-modal"><div class="check">✨</div><h3>Request Sent!</h3>
+        <p>Your custom cake request is on its way!<br>We'll contact you shortly to discuss every detail.<br><br>
+        <a href="https://www.instagram.com/anayaskitchenlahore?igsh=NXI2czIzN3ExeXB4" target="_blank" style="color:var(--red);font-weight:700">@anayaskitchenlahore</a></p>
+        <button class="place-btn" onclick="location.reload()">Back to Shop</button></div>`;
+    }
+    function openGalleryOrder(label){currentGalleryLabel=label;document.getElementById('galleryOrderTitle').textContent=`Order: ${label}`;document.getElementById('galleryOrderModal').classList.add('open');}
+    function closeGalleryOrderModal(){document.getElementById('galleryOrderModal').classList.remove('open');}
+    function submitGalleryOrder(){
+      const n=document.getElementById('gName').value.trim(),p=document.getElementById('gPhone').value.trim(),a=document.getElementById('gAddr').value.trim(),t=document.getElementById('gTime').value.trim(),note=document.getElementById('gNote').value.trim();
+      if(!n||!p||!a){alert('Please fill in all required fields');return;}
+      const msg=`🎂 *Gallery Order - Anaya's Kitchen CakeHouse*\n\n*Cake:* ${currentGalleryLabel}\n*Name:* ${n}\n*Phone:* ${p}\n*Address:* ${a}${t?`\n*Delivery Time:* ${t}`:''}\n*Payment:* Cash on Delivery (COD)${note?`\n*Special Requests:* ${note}`:''}`;
+      window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`,'_blank');
+      closeGalleryOrderModal();
+    }
+    function toggleMenu(){const m=document.getElementById('mobileMenu'),h=document.getElementById('hamburger');m.classList.toggle('open');h.classList.toggle('open');}
+    function closeMenu(){document.getElementById('mobileMenu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');}
+    document.addEventListener('click',e=>{
+      const m=document.getElementById('mobileMenu'),h=document.getElementById('hamburger');
+      if(m.classList.contains('open')&&!m.contains(e.target)&&!h.contains(e.target))closeMenu();
+    });
+    document.addEventListener('DOMContentLoaded',()=>{renderTabs();renderMenu();renderGallery();});
+  </script>
+</body>
+</html>

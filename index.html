@@ -81,11 +81,7 @@
     .gspot1{width:500px;height:500px;background:#c8953a30;top:-100px;right:-100px}
     .gspot2{width:400px;height:400px;background:#ffffff08;bottom:-100px;left:-80px}
     /* ornamental border frame */
-    .hero-frame{
-      position:absolute;inset:20px;border:1px solid #ffffff15;border-radius:4px;pointer-events:none;
-    }
-    .hero-frame::before{content:'✦';position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--red3);padding:0 12px;color:var(--gold2);font-size:.9rem}
-    .hero-frame::after{content:'✦';position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);background:var(--red3);padding:0 12px;color:var(--gold2);font-size:.9rem}
+
     .hero-inner{position:relative;z-index:2;text-align:center;padding:3.5rem 1.5rem;max-width:700px;animation:heroIn 1s ease both}
     @keyframes heroIn{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
     .hero-badge{display:inline-flex;align-items:center;gap:.45rem;background:#ffffff15;color:var(--gold2);border:1px solid #ffffff25;border-radius:999px;padding:.38rem 1.2rem;font-size:.7rem;font-weight:700;margin-bottom:1.8rem;letter-spacing:2px;text-transform:uppercase;font-family:'Lato',sans-serif}
@@ -109,9 +105,9 @@
     .hero-divider span{color:var(--gold2);font-size:.8rem}
     .hero-sub{color:#ffffff99;max-width:480px;margin:0 auto 2rem;font-size:.95rem;line-height:1.95;font-weight:300}
     .hero-btns{display:flex;gap:.8rem;justify-content:center;flex-wrap:nowrap;margin-bottom:2.5rem}
-    .btn-primary{background:var(--gold);color:#fff;padding:.85rem 2rem;border-radius:999px;border:none;font-weight:700;font-size:.85rem;cursor:pointer;transition:all .2s;letter-spacing:.5px;text-transform:uppercase;font-family:'Lato',sans-serif;box-shadow:0 4px 18px #c8953a50}
+    .btn-primary{background:var(--gold);color:#fff;padding:.85rem 2rem;border-radius:999px;border:none;font-weight:700;font-size:.80rem;cursor:pointer;transition:all .2s;letter-spacing:.4px;text-transform:uppercase;font-family:'Lato',sans-serif;box-shadow:0 4px 18px #c8953a50}
     .btn-primary:hover{background:var(--gold3);transform:translateY(-2px)}
-    .btn-outline{background:transparent;color:#fff;padding:.85rem 2rem;border-radius:999px;border:1.5px solid #ffffff50;font-weight:700;font-size:.85rem;cursor:pointer;transition:all .2s;letter-spacing:.5px;text-transform:uppercase;font-family:'Lato',sans-serif}
+    .btn-outline{background:transparent;color:#fff;padding:.85rem 2rem;border-radius:999px;border:1.5px solid #ffffff50;font-weight:700;font-size:.80rem;cursor:pointer;transition:all .2s;letter-spacing:.4px;text-transform:uppercase;font-family:'Lato',sans-serif}
     .btn-outline:hover{background:#ffffff15;border-color:#fff}
     .hero-24hr{display:inline-flex;align-items:center;gap:.5rem;background:#ffffff15;border:1px solid var(--gold2);border-radius:999px;padding:.4rem 1.2rem;color:var(--gold2);font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;font-family:'Lato',sans-serif}
     .hero-stats{display:flex;justify-content:center;gap:2.5rem;flex-wrap:nowrap;margin-top:1.8rem;background:#ffffff0d;border:1px solid #ffffff18;border-radius:8px;padding:1.3rem 2rem}
